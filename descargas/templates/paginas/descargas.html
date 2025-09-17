@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}Ln-Descargas{% endblock %}
+
+{% block content %}
+<div class="flex justify-center items-center min-h-screen bg-gray-100">
+  <div class="flex flex-col items-center bg-white p-8 rounded-lg shadow-md w-full max-w-lg">
+    <h1 class="text-2xl font-bold mb-6 text-gray-800">Video Downloader</h1>
+    
+    {% if messages %}
+      <ul class="w-full mb-4">
+      {% for message in messages %}
+          <li class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-center" role="alert">
+              {{ message }}
+          </li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+
+    <form action="download_video" method="post" class="w-full flex">
+      {% csrf_token %}
+      <input 
+        type="text" 
+        name="url" 
+        placeholder="Ingresa la URL del video" 
+        class="flex-grow rounded border border-gray-300 px-4 py-2 mr-2 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+        required 
+      />
+      <button 
+        type="submit" 
+        class="rounded bg-blue-500 px-6 py-2 font-bold text-white hover:bg-blue-700 transition duration-300"
+      >
+        Descargar
+      </button>
+    </form>
+  </div>
+</div>
+{% endblock %}
